@@ -21,8 +21,12 @@ public:
     void reset() noexcept;
 
     template <typename ProcessContext>
-    void process(const ProcessContext& context) noexcept;
+    void process(const ProcessContext& context) noexcept {
+        juce::ignoreUnused(context);
+    }
 
     void prepare(const juce::dsp::ProcessSpec& spec);
 private:
 };
+
+template class CustomOscillator<float>;

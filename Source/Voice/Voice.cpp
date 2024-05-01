@@ -52,7 +52,7 @@ void Voice::noteKeyStateChanged() {
 void Voice::renderNextBlock(juce::AudioBuffer<float>& outputBuffer, int startSample, int numSamples) {
     auto block = tempBlock.getSubBlock(0, (size_t)numSamples);
     block.clear();
-    juce::dsp::ProcessContextReplacing<float>context(block);
+    juce::dsp::ProcessContextReplacing<float> context(block);
     processorChain.process(context);
 
     juce::dsp::AudioBlock<float>(outputBuffer).getSubBlock((size_t)startSample, (size_t)numSamples).add(tempBlock);

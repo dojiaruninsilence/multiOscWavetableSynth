@@ -11,26 +11,14 @@
 
 //==============================================================================
 MultiOscWavetableSynthAudioProcessor::MultiOscWavetableSynthAudioProcessor()
-#ifndef JucePlugin_PreferredChannelConfigurations
-     : AudioProcessor (BusesProperties()
-                     #if ! JucePlugin_IsMidiEffect
-                      #if ! JucePlugin_IsSynth
-                       .withInput  ("Input",  juce::AudioChannelSet::stereo(), true)
-                      #endif
-                       .withOutput ("Output", juce::AudioChannelSet::stereo(), true)
-                     #endif
-                       )
-#endif
-{
+     : AudioProcessor (BusesProperties().withOutput ("Output", juce::AudioChannelSet::stereo(), true)) {
 }
 
-MultiOscWavetableSynthAudioProcessor::~MultiOscWavetableSynthAudioProcessor()
-{
+MultiOscWavetableSynthAudioProcessor::~MultiOscWavetableSynthAudioProcessor() {
 }
 
 //==============================================================================
-const juce::String MultiOscWavetableSynthAudioProcessor::getName() const
-{
+const juce::String MultiOscWavetableSynthAudioProcessor::getName() const {
     return JucePlugin_Name;
 }
 
@@ -93,8 +81,8 @@ void MultiOscWavetableSynthAudioProcessor::changeProgramName (int index, const j
 //==============================================================================
 void MultiOscWavetableSynthAudioProcessor::prepareToPlay (double sampleRate, int samplesPerBlock)
 {
-    // Use this method as the place to do any pre-playback
-    // initialisation that you need..
+    audioEngine.prepare({ sampleRate, (juce::uint32)samplesPerBlock, 2 });
+    midiMessageCollector.reset(sampleRate);
 }
 
 void MultiOscWavetableSynthAudioProcessor::releaseResources()
@@ -135,6 +123,8 @@ void MultiOscWavetableSynthAudioProcessor::processBlock (juce::AudioBuffer<float
     auto totalNumInputChannels  = getTotalNumInputChannels();
     auto totalNumOutputChannels = getTotalNumOutputChannels();
 
+    midiMessageCollector.removeNextBlockOfMessages(midiMessages, buffer.getNumSamples());
+
     // In case we have more outputs than inputs, this code clears any output
     // channels that didn't contain input data, (because these aren't
     // guaranteed to be empty - they may contain garbage).
@@ -144,18 +134,8 @@ void MultiOscWavetableSynthAudioProcessor::processBlock (juce::AudioBuffer<float
     for (auto i = totalNumInputChannels; i < totalNumOutputChannels; ++i)
         buffer.clear (i, 0, buffer.getNumSamples());
 
-    // This is the place where you'd normally do the guts of your plugin's
-    // audio processing...
-    // Make sure to reset the state if your inner loop is processing
-    // the samples and the outer loop is handling the channels.
-    // Alternatively, you can process the samples with the channels
-    // interleaved by keeping the same state.
-    for (int channel = 0; channel < totalNumInputChannels; ++channel)
-    {
-        auto* channelData = buffer.getWritePointer (channel);
-
-        // ..do something to the data...
-    }
+    audioEngine.renderNextBlock(buffer, midiMessages, 0, buffer.getNumSamples());
+    scopeDataCollector.process(buffer.getReadPointer(0), (size_t)buffer.getNumSamples());
 }
 
 //==============================================================================
@@ -181,6 +161,14 @@ void MultiOscWavetableSynthAudioProcessor::setStateInformation (const void* data
 {
     // You should use this method to restore your parameters from this memory block,
     // whose contents will have been created by the getStateInformation() call.
+}
+
+juce::MidiMessageCollector& MultiOscWavetableSynthAudioProcessor::getMidiMessageCollector() noexcept {
+    return midiMessageCollector;
+}
+
+AudioBufferQueue<float>& MultiOscWavetableSynthAudioProcessor::getAudioBufferQueue() noexcept {
+    return audioBufferQueue;
 }
 
 //==============================================================================

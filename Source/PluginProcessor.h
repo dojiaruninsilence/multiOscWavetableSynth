@@ -10,6 +10,10 @@
 
 #include <JuceHeader.h>
 
+#include "Audio/AudioEngine.h"
+#include "Audio/AudioBufferQueue.h"
+#include "Scope/ScopeDataCollector.h"
+
 //==============================================================================
 /**
 */
@@ -53,7 +57,15 @@ public:
     void getStateInformation (juce::MemoryBlock& destData) override;
     void setStateInformation (const void* data, int sizeInBytes) override;
 
+    juce::MidiMessageCollector& getMidiMessageCollector() noexcept;
+    AudioBufferQueue<float>& getAudioBufferQueue() noexcept;
+
 private:
     //==============================================================================
+    AudioEngine audioEngine;
+    juce::MidiMessageCollector midiMessageCollector;
+    AudioBufferQueue<float> audioBufferQueue;
+    ScopeDataCollector<float> scopeDataCollector{ audioBufferQueue };
+
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (MultiOscWavetableSynthAudioProcessor)
 };

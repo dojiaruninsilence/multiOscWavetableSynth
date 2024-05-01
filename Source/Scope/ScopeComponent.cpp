@@ -45,7 +45,7 @@ void ScopeComponent<SampleType>::paint (juce::Graphics& g) {
 
     // spectrum
     auto spectrumRect = juce::Rectangle<SampleType>{ SampleType(0), h / 2, w, h / 2 };
-    plot(spectrumRect.data(), spectrumData.size() / 4, g, spectrumRect);
+    plot(spectrumData.data(), spectrumData.size() / 4, g, spectrumRect);
 }
 
 template <typename SampleType>

@@ -27,3 +27,5 @@ private:
     juce::AbstractFifo abstractFifo{ numBuffers };
     std::array<std::array<SampleType, bufferSize>, numBuffers> buffers;
 };
+
+template class AudioBufferQueue<float>;

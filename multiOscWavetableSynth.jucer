@@ -2,7 +2,8 @@
 
 <JUCERPROJECT id="YcDrpc" name="multiOscWavetableSynth" projectType="audioplug"
               useAppConfig="0" addUsingNamespaceToJuceHeader="0" displaySplashScreen="1"
-              jucerFormatVersion="1">
+              jucerFormatVersion="1" pluginCharacteristicsValue="pluginIsSynth,pluginProducesMidiOut"
+              headerPath="/Source/">
   <MAINGROUP id="PiNcyT" name="multiOscWavetableSynth">
     <GROUP id="{01744D41-97F9-AFA0-C605-28D4CA60E55D}" name="Source">
       <GROUP id="{A68B936C-E694-F5C4-8F85-E88BB2913BE7}" name="Audio">

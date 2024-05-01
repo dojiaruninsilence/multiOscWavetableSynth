@@ -30,11 +30,6 @@ void CustomOscillator<Type>::reset() noexcept {
     
 }
 
-template <typename ProcessContext>
-void process(const ProcessContext& context)  {
-    juce::ignoreUnused(context);
-}
-
 template <typename Type>
 void CustomOscillator<Type>::prepare(const juce::dsp::ProcessSpec& spec) {
     juce::ignoreUnused(spec);

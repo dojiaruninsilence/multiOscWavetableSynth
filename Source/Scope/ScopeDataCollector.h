@@ -28,3 +28,5 @@ private:
 
     enum class State {waitingForTrigger, collecting} state {State::waitingForTrigger};
 };
+
+template class ScopeDataCollector<float>;
