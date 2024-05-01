@@ -5,6 +5,34 @@
               jucerFormatVersion="1">
   <MAINGROUP id="PiNcyT" name="multiOscWavetableSynth">
     <GROUP id="{01744D41-97F9-AFA0-C605-28D4CA60E55D}" name="Source">
+      <GROUP id="{A68B936C-E694-F5C4-8F85-E88BB2913BE7}" name="Audio">
+        <FILE id="kNVkeL" name="AudioBufferQueue.cpp" compile="1" resource="0"
+              file="Source/Audio/AudioBufferQueue.cpp"/>
+        <FILE id="IJridI" name="AudioBufferQueue.h" compile="0" resource="0"
+              file="Source/Audio/AudioBufferQueue.h"/>
+        <FILE id="iijepL" name="AudioEngine.cpp" compile="1" resource="0" file="Source/Audio/AudioEngine.cpp"/>
+        <FILE id="tVug0Z" name="AudioEngine.h" compile="0" resource="0" file="Source/Audio/AudioEngine.h"/>
+      </GROUP>
+      <GROUP id="{7384F0F7-34D8-081D-6B6E-B86CBE8DA2F2}" name="Osc">
+        <FILE id="kczhwu" name="CustomOscillator.cpp" compile="1" resource="0"
+              file="Source/Osc/CustomOscillator.cpp"/>
+        <FILE id="bwt739" name="CustomOscillator.h" compile="0" resource="0"
+              file="Source/Osc/CustomOscillator.h"/>
+      </GROUP>
+      <GROUP id="{B5A8FBA8-C82B-B480-6944-A8BFDCA2E567}" name="Scope">
+        <FILE id="im7zwQ" name="ScopeComponent.cpp" compile="1" resource="0"
+              file="Source/Scope/ScopeComponent.cpp"/>
+        <FILE id="XVvLr9" name="ScopeComponent.h" compile="0" resource="0"
+              file="Source/Scope/ScopeComponent.h"/>
+        <FILE id="UvBEqm" name="ScopeDataCollector.cpp" compile="1" resource="0"
+              file="Source/Scope/ScopeDataCollector.cpp"/>
+        <FILE id="fX9AKr" name="ScopeDataCollector.h" compile="0" resource="0"
+              file="Source/Scope/ScopeDataCollector.h"/>
+      </GROUP>
+      <GROUP id="{B4DB2529-6286-ED39-24E2-634FD89C36B5}" name="Voice">
+        <FILE id="ihztTM" name="Voice.cpp" compile="1" resource="0" file="Source/Voice/Voice.cpp"/>
+        <FILE id="rSeoHx" name="Voice.h" compile="0" resource="0" file="Source/Voice/Voice.h"/>
+      </GROUP>
       <FILE id="grunhP" name="PluginProcessor.cpp" compile="1" resource="0"
             file="Source/PluginProcessor.cpp"/>
       <FILE id="kxDcx0" name="PluginProcessor.h" compile="0" resource="0"
@@ -24,6 +52,7 @@
     <MODULE id="juce_audio_utils" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
     <MODULE id="juce_core" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
     <MODULE id="juce_data_structures" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_dsp" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
     <MODULE id="juce_events" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
     <MODULE id="juce_graphics" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
     <MODULE id="juce_gui_basics" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
@@ -49,6 +78,7 @@
         <MODULEPATH id="juce_graphics" path="../../../../juce/JUCE/modules"/>
         <MODULEPATH id="juce_gui_basics" path="../../../../juce/JUCE/modules"/>
         <MODULEPATH id="juce_gui_extra" path="../../../../juce/JUCE/modules"/>
+        <MODULEPATH id="juce_dsp" path="../../../../juce/JUCE/modules"/>
       </MODULEPATHS>
     </VS2022>
   </EXPORTFORMATS>
