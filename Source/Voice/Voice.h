@@ -38,4 +38,6 @@ private:
     };
 
     juce::dsp::ProcessorChain<CustomOscillator<float>, juce::dsp::Gain<float>> processorChain;
+
+    static constexpr size_t lfoUpdateRate = 100;
 };
