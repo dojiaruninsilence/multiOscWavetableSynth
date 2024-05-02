@@ -22,11 +22,17 @@ public:
 
     template <typename ProcessContext>
     void process(const ProcessContext& context) noexcept {
-        juce::ignoreUnused(context);
+        processorChain.process(context);
     }
 
     void prepare(const juce::dsp::ProcessSpec& spec);
 private:
+    enum {
+        oscIndex,
+        gainIndex
+    };
+
+    juce::dsp::ProcessorChain<juce::dsp::Oscillator<Type>, juce::dsp::Gain<Type>> processorChain;
 };
 
 template class CustomOscillator<float>;
